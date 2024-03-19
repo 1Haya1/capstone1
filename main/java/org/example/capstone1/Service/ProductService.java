@@ -74,7 +74,13 @@ public class ProductService {
         return getProductById(productId).getRatings();
     }
 
-    
+      public ArrayList<Product> filter(String cat){
+        ArrayList <Product>list=new ArrayList<>();
+        for (Product p:products){
+            if(p.getCategoryId().equalsIgnoreCase(cat))
+                list.add(p);
+        }
+    return list;}
 
 
 }
