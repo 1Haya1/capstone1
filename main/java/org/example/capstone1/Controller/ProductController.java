@@ -84,7 +84,11 @@ public ResponseEntity addProduct(@RequestBody  Product product, Errors errors){
         return ResponseEntity.ok(ratings);
     }
 
-
+  @GetMapping("/filtr/{catId}")
+    public ResponseEntity filtr(@PathVariable String catId) {
+        List<Product>list= productService.filter(catId);
+        return ResponseEntity.status(200).body(list);
+    }
 
 
 
