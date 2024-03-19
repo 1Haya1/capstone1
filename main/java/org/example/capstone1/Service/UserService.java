@@ -109,7 +109,6 @@ public class UserService {
         User user = getUserById(userId);
         if (user != null) {
             double currentBalance = user.getBalance();
-            // التأكد من أن الرصيد لا يقل عن المبلغ المراد استرداده
                 user.setBalance(currentBalance + amount);
             
         }}
