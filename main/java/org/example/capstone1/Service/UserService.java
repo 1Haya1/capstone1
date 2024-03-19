@@ -73,22 +73,23 @@ public class UserService {
 
 
     //12
-    public String buyProduct(Integer userId, Integer productId, Integer merchantId) {
+      public Product buyProduct(Integer userId, Integer productId, Integer merchantId) {
         User user = userService.getUserById(userId);
         Product product = productService.getProductById(productId);
-        MerchantStock merchantStock = merchantStockService.getMerchantStock1(null,merchantId);
+        MerchantStock merchantStock = merchantStockService.getMerchantStock1(null, merchantId);
 
         if (user != null && product != null && merchantStock != null) {
             if (user.getBalance() >= product.getPrice() && merchantStock.getStock() > 0) {
                 user.setBalance(user.getBalance() - product.getPrice());
                 merchantStock.setStock(merchantStock.getStock() - 1);
 
-                return "Product purchased.";
+                // إذا تم شراء المنتج بنجاح، قم بإرجاع المنتج المشترى
+                return product;
             } else {
-                return "product out of stock.";
+                return null; // إشعار بفشل الشراء
             }
         } else {
-            return "Invalid user, product, or merchant.";
+            return null; // إشعار بفشل الشراء
         }
     }
 
